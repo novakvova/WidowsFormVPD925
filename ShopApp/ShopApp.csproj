@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Entities\ApplicationDbContext.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
