@@ -1,10 +1,12 @@
 ﻿using ShopApp.Categories;
 using ShopApp.Entities;
+using ShopApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -50,7 +52,9 @@ namespace ShopApp
                 var path = Path.Combine(Directory.GetCurrentDirectory(), 
                     "images", nameFile);
 
-                File.Copy(file, path);
+                //File.Copy(file, path);
+                var bmp =  ImageHelper.CompressImage(Image.FromFile(file), 120, 80);
+                bmp.Save(path, ImageFormat.Jpeg);
 
                 ApplicationDbContext context = new ApplicationDbContext();
                 Category category = new Category
@@ -62,7 +66,8 @@ namespace ShopApp
                 context.Categories.Add(category);
                 context.SaveChanges();
 
-                dgvCategories.Rows.Add(new object[] { category.Id, category.Name });
+                dgvCategories.Rows.Add(new object[] { category.Id, category.Name, Image.FromFile(path),
+                    category.Description });
                 MessageBox.Show("Можна зберігати в БД");
             }
         }

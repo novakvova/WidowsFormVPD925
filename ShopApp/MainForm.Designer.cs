@@ -61,6 +61,7 @@
             this.dgvCategories.Location = new System.Drawing.Point(66, 47);
             this.dgvCategories.Name = "dgvCategories";
             this.dgvCategories.ReadOnly = true;
+            this.dgvCategories.RowTemplate.Height = 80;
             this.dgvCategories.Size = new System.Drawing.Size(771, 294);
             this.dgvCategories.TabIndex = 1;
             // 
