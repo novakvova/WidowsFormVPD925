@@ -22,7 +22,16 @@ namespace ShopApp
             ApplicationDbContext context = new ApplicationDbContext();
             foreach (var item in context.Categories)
             {
-                dgvCategories.Rows.Add(new object[] { item.Id, item.Name });
+                var path = Path.Combine(Directory.GetCurrentDirectory(),
+                    "images", item.Image);
+
+                dgvCategories.Rows.Add(new object[]
+                {
+                    item.Id,
+                    item.Name,
+                    Image.FromFile(path),
+                    item.Description
+                });
             }
 
         }

@@ -32,6 +32,8 @@
             this.dgvCategories = new System.Windows.Forms.DataGridView();
             this.ColId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.ColDescript = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,9 @@
             this.dgvCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColId,
-            this.ColName});
+            this.ColName,
+            this.ColImage,
+            this.ColDescript});
             this.dgvCategories.Location = new System.Drawing.Point(66, 47);
             this.dgvCategories.Name = "dgvCategories";
             this.dgvCategories.ReadOnly = true;
@@ -73,6 +77,21 @@
             this.ColName.HeaderText = "Назва";
             this.ColName.Name = "ColName";
             this.ColName.ReadOnly = true;
+            // 
+            // ColImage
+            // 
+            this.ColImage.HeaderText = "Фото";
+            this.ColImage.Name = "ColImage";
+            this.ColImage.ReadOnly = true;
+            // 
+            // ColDescript
+            // 
+            this.ColDescript.HeaderText = "Опис";
+            this.ColDescript.Name = "ColDescript";
+            this.ColDescript.ReadOnly = true;
+            this.ColDescript.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColDescript.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColDescript.Width = 250;
             // 
             // MainForm
             // 
@@ -97,6 +116,8 @@
         private System.Windows.Forms.DataGridView dgvCategories;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
+        private System.Windows.Forms.DataGridViewImageColumn ColImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDescript;
     }
 }
 
