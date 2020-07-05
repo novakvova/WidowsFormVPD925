@@ -53,7 +53,7 @@ namespace ShopApp
                 context.Categories.Add(category);
                 context.SaveChanges();
 
-
+                dgvCategories.Rows.Add(new object[] { category.Id, category.Name });
                 MessageBox.Show("Можна зберігати в БД");
             }
         }
