@@ -123,5 +123,24 @@ namespace ShopApp
                 }
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvCategories.SelectedRows.Count != 0)
+            {
+                DataGridViewRow row = this.dgvCategories.SelectedRows[0];
+                var id = int.Parse(row.Cells["ColId"].Value.ToString());
+                var cat = context.Categories.SingleOrDefault(c => c.Id == id);
+                if (cat != null)
+                {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(),
+                    "images", cat.Image);
+                    File.Delete(path);
+                    context.Categories.Remove(cat);
+                    context.SaveChanges();
+                    UpdateAlldgvCategories();
+                }
+            }
+        }
     }
 }
