@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,24 +18,13 @@ namespace ShopApp
 {
     public partial class MainForm : Form
     {
+        private readonly ApplicationDbContext context;
         public MainForm()
         {
             InitializeComponent();
 
-            ApplicationDbContext context = new ApplicationDbContext();
-            foreach (var item in context.Categories)
-            {
-                var path = Path.Combine(Directory.GetCurrentDirectory(),
-                    "images", item.Image);
-
-                dgvCategories.Rows.Add(new object[]
-                {
-                    item.Id,
-                    item.Name,
-                    Image.FromFile(path),
-                    item.Description
-                });
-            }
+            context = new ApplicationDbContext();
+            UpdateAlldgvCategories();
 
         }
 
@@ -46,17 +36,17 @@ namespace ShopApp
                 string name = dlg.CategoryName;
                 string description = dlg.CategoryDescription;
                 string file = dlg.FileSelect;
-                
+
                 string extension = Path.GetExtension(file);
                 string nameFile = Path.GetRandomFileName() + extension;
-                var path = Path.Combine(Directory.GetCurrentDirectory(), 
+                var path = Path.Combine(Directory.GetCurrentDirectory(),
                     "images", nameFile);
 
                 //File.Copy(file, path);
-                var bmp =  ImageHelper.CompressImage(Image.FromFile(file), 120, 80);
+                var bmp = ImageHelper.CompressImage(Image.FromFile(file), 120, 80);
                 bmp.Save(path, ImageFormat.Jpeg);
 
-                ApplicationDbContext context = new ApplicationDbContext();
+                
                 Category category = new Category
                 {
                     Name = name,
@@ -66,9 +56,71 @@ namespace ShopApp
                 context.Categories.Add(category);
                 context.SaveChanges();
 
-                dgvCategories.Rows.Add(new object[] { category.Id, category.Name, Image.FromFile(path),
-                    category.Description });
+                UpdateAlldgvCategories();
+                //var imageBytes = File.ReadAllBytes(path);
+                //using (MemoryStream stream = new MemoryStream(imageBytes))
+                //{
+                //    dgvCategories.Rows.Add(new object[] { category.Id, category.Name, Image.FromStream(stream),
+                //    category.Description });
+                //}
                 MessageBox.Show("Можна зберігати в БД");
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvCategories.SelectedRows.Count != 0)
+            {
+                DataGridViewRow row = this.dgvCategories.SelectedRows[0];
+                var id = int.Parse(row.Cells["ColId"].Value.ToString());
+                var cat = context.Categories.SingleOrDefault(c => c.Id == id);
+                if(cat!=null)
+                {
+                    CategoryEditForm dlg = new CategoryEditForm();
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(),
+                    "images", cat.Image);
+
+                    dlg.FileSelect = path;
+                    dlg.CategoryName = cat.Name;
+                    dlg.CategoryDescription = cat.Description;
+
+                    if(dlg.ShowDialog() == DialogResult.OK)
+                    {
+                        //мы змінили файл категорії
+                        if (path != dlg.FileSelect)
+                        {
+                            var bmp = ImageHelper.CompressImage(Image.FromFile(dlg.FileSelect), 120, 80);
+                            bmp.Save(path, ImageFormat.Jpeg); //Зберігаємо під тоюж самою назвою
+                        }
+                        //cat = context.Categories.SingleOrDefault(c => c.Id == id);
+                        cat.Name = dlg.CategoryName;
+                        cat.Description = dlg.CategoryDescription;
+                        context.SaveChanges();
+                        UpdateAlldgvCategories();
+                    }
+
+                }
+                
+                
+                //MessageBox.Show("Id = ", id.ToString());
+            }
+        }
+
+        private void UpdateAlldgvCategories()
+        {
+            dgvCategories.Rows.Clear();
+            foreach (var category in context.Categories)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(),
+                    "images", category.Image);
+
+                var imageBytes = File.ReadAllBytes(path);
+                using (MemoryStream stream = new MemoryStream(imageBytes))
+                {
+                    dgvCategories.Rows.Add(new object[] { category.Id, category.Name, Image.FromStream(stream),
+                    category.Description });
+                }
             }
         }
     }

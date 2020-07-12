@@ -34,12 +34,13 @@
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.ColDescript = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddCategory
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(851, 388);
+            this.btnAddCategory.Location = new System.Drawing.Point(875, 356);
             this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddCategory.Name = "btnAddCategory";
             this.btnAddCategory.Size = new System.Drawing.Size(161, 44);
@@ -94,12 +95,24 @@
             this.ColDescript.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ColDescript.Width = 250;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(875, 47);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(161, 69);
+            this.btnEdit.TabIndex = 0;
+            this.btnEdit.Text = "Редагувати категорію";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 466);
             this.Controls.Add(this.dgvCategories);
+            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAddCategory);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -119,6 +132,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
         private System.Windows.Forms.DataGridViewImageColumn ColImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDescript;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
 
