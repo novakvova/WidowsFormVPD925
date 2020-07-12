@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Entities\ApplicationDbContext.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\DbUser.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +81,10 @@
     <Compile Include="Migrations\202006280815472_Add tblcategories.cs" />
     <Compile Include="Migrations\202006280815472_Add tblcategories.designer.cs">
       <DependentUpon>202006280815472_Add tblcategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007121005251_Add tblUsers.cs" />
+    <Compile Include="Migrations\202007121005251_Add tblUsers.designer.cs">
+      <DependentUpon>202007121005251_Add tblUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -95,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006280815472_Add tblcategories.resx">
       <DependentUpon>202006280815472_Add tblcategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007121005251_Add tblUsers.resx">
+      <DependentUpon>202007121005251_Add tblUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

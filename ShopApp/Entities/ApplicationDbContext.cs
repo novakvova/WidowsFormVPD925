@@ -14,5 +14,6 @@ namespace ShopApp.Entities
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<DbUser> Users { get; set; } 
     }
 }
