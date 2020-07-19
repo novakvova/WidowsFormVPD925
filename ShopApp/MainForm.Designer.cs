@@ -28,125 +28,112 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnAddCategory = new System.Windows.Forms.Button();
-            this.dgvCategories = new System.Windows.Forms.DataGridView();
-            this.ColId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColImage = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ColDescript = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).BeginInit();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.headMenu = new System.Windows.Forms.MenuStrip();
+            this.headMenu_file = new System.Windows.Forms.ToolStripMenuItem();
+            this.headMenu_file_exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.headMenu_data = new System.Windows.Forms.ToolStripMenuItem();
+            this.headMenu_data_users = new System.Windows.Forms.ToolStripMenuItem();
+            this.headMenu_data_categories = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.headMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnAddCategory
+            // menuStrip1
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(875, 356);
-            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(161, 44);
-            this.btnAddCategory.TabIndex = 0;
-            this.btnAddCategory.Text = "Додати категорію";
-            this.btnAddCategory.UseVisualStyleBackColor = true;
-            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 24);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // dgvCategories
+            // toolStripMenuItem1
             // 
-            this.dgvCategories.AllowUserToAddRows = false;
-            this.dgvCategories.AllowUserToDeleteRows = false;
-            this.dgvCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategories.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColId,
-            this.ColName,
-            this.ColImage,
-            this.ColDescript});
-            this.dgvCategories.Location = new System.Drawing.Point(66, 47);
-            this.dgvCategories.Name = "dgvCategories";
-            this.dgvCategories.ReadOnly = true;
-            this.dgvCategories.RowTemplate.Height = 80;
-            this.dgvCategories.Size = new System.Drawing.Size(771, 294);
-            this.dgvCategories.TabIndex = 1;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
             // 
-            // ColId
+            // headMenu
             // 
-            this.ColId.HeaderText = "ColId";
-            this.ColId.Name = "ColId";
-            this.ColId.ReadOnly = true;
-            this.ColId.Visible = false;
+            this.headMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.headMenu_file,
+            this.headMenu_data});
+            this.headMenu.Location = new System.Drawing.Point(0, 0);
+            this.headMenu.Name = "headMenu";
+            this.headMenu.Size = new System.Drawing.Size(800, 24);
+            this.headMenu.TabIndex = 1;
+            this.headMenu.Text = "menuStrip2";
             // 
-            // ColName
+            // headMenu_file
             // 
-            this.ColName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ColName.HeaderText = "Назва";
-            this.ColName.Name = "ColName";
-            this.ColName.ReadOnly = true;
+            this.headMenu_file.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.headMenu_file_exit});
+            this.headMenu_file.Name = "headMenu_file";
+            this.headMenu_file.Size = new System.Drawing.Size(48, 20);
+            this.headMenu_file.Text = "Файл";
             // 
-            // ColImage
+            // headMenu_file_exit
             // 
-            this.ColImage.HeaderText = "Фото";
-            this.ColImage.Name = "ColImage";
-            this.ColImage.ReadOnly = true;
+            this.headMenu_file_exit.Name = "headMenu_file_exit";
+            this.headMenu_file_exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.headMenu_file_exit.Size = new System.Drawing.Size(180, 22);
+            this.headMenu_file_exit.Text = "Вихід";
+            this.headMenu_file_exit.Click += new System.EventHandler(this.headMenu_file_exit_Click);
             // 
-            // ColDescript
+            // headMenu_data
             // 
-            this.ColDescript.HeaderText = "Опис";
-            this.ColDescript.Name = "ColDescript";
-            this.ColDescript.ReadOnly = true;
-            this.ColDescript.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColDescript.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.ColDescript.Width = 250;
+            this.headMenu_data.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.headMenu_data_users,
+            this.headMenu_data_categories});
+            this.headMenu_data.Name = "headMenu_data";
+            this.headMenu_data.Size = new System.Drawing.Size(43, 20);
+            this.headMenu_data.Text = "Дані";
             // 
-            // btnEdit
+            // headMenu_data_users
             // 
-            this.btnEdit.Location = new System.Drawing.Point(875, 47);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(161, 69);
-            this.btnEdit.TabIndex = 0;
-            this.btnEdit.Text = "Редагувати категорію";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.headMenu_data_users.Name = "headMenu_data_users";
+            this.headMenu_data_users.Size = new System.Drawing.Size(180, 22);
+            this.headMenu_data_users.Text = "Користувачі";
+            this.headMenu_data_users.Click += new System.EventHandler(this.headMenu_data_users_Click);
             // 
-            // btnDelete
+            // headMenu_data_categories
             // 
-            this.btnDelete.Location = new System.Drawing.Point(875, 141);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(161, 44);
-            this.btnDelete.TabIndex = 0;
-            this.btnDelete.Text = "Видалити";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.headMenu_data_categories.Name = "headMenu_data_categories";
+            this.headMenu_data_categories.Size = new System.Drawing.Size(180, 22);
+            this.headMenu_data_categories.Text = "Категорії";
+            this.headMenu_data_categories.Click += new System.EventHandler(this.headMenu_data_categories_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 466);
-            this.Controls.Add(this.dgvCategories);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnAddCategory);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.headMenu);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Магазин одягу \"Шорти\"";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategories)).EndInit();
+            this.Text = "MainForm";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.headMenu.ResumeLayout(false);
+            this.headMenu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnAddCategory;
-        private System.Windows.Forms.DataGridView dgvCategories;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
-        private System.Windows.Forms.DataGridViewImageColumn ColImage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColDescript;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.MenuStrip headMenu;
+        private System.Windows.Forms.ToolStripMenuItem headMenu_file;
+        private System.Windows.Forms.ToolStripMenuItem headMenu_file_exit;
+        private System.Windows.Forms.ToolStripMenuItem headMenu_data;
+        private System.Windows.Forms.ToolStripMenuItem headMenu_data_users;
+        private System.Windows.Forms.ToolStripMenuItem headMenu_data_categories;
     }
 }
-

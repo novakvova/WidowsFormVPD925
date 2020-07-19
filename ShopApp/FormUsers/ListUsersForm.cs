@@ -39,6 +39,10 @@ namespace ShopApp.FormUsers
                 {
                     query = query.Where(u => u.LastName.Contains(search.LastName));
                 }
+                if (!string.IsNullOrEmpty(search.FirstName))
+                {
+                    query = query.Where(u => u.FirstName.Contains(search.FirstName));
+                }
             }
             foreach (var item in query)
             {
@@ -208,6 +212,7 @@ namespace ShopApp.FormUsers
             var lastName = txtFindLastName.Text;
             UserSearchModel search = new UserSearchModel();
             search.LastName = lastName;
+            search.FirstName = txtFirstName.Text;
             UpdateUsersGrid(search);
         }
     }
