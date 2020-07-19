@@ -1,6 +1,7 @@
 ﻿using ShopApp.Categories;
 using ShopApp.Entities;
 using ShopApp.Helpers;
+using ShopApp.Model;
 using SimpleCrypto;
 using System;
 using System.Collections.Generic;
@@ -18,32 +19,38 @@ namespace ShopApp.FormUsers
 {
     public partial class ListUsersForm : Form
     {
+        ApplicationDbContext _context;
         public ListUsersForm()
         {
             InitializeComponent();
 
-            ApplicationDbContext context = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
 
-            UpdateUsersGrid(context);
+            UpdateUsersGrid();
         }
 
-        private void UpdateUsersGrid(ApplicationDbContext context)
+        private void UpdateUsersGrid(UserSearchModel search=null)
         {
             dgvUsers.Rows.Clear();
-            foreach (var item in context.Users)
+            var query = _context.Users.Where(u => u.Deleted == false);
+            if(search!=null)
             {
-                if (!item.Deleted)
+                if(!string.IsNullOrEmpty(search.LastName))
                 {
-                    var pathTmp = Path.Combine(Directory.GetCurrentDirectory(), "images", item.Image);
-                    if (File.Exists(pathTmp))
-                    {
-                        var imageBytes = File.ReadAllBytes(pathTmp);
+                    query = query.Where(u => u.LastName.Contains(search.LastName));
+                }
+            }
+            foreach (var item in query)
+            {
+                var pathTmp = Path.Combine(Directory.GetCurrentDirectory(), "images", item.Image);
+                if (File.Exists(pathTmp))
+                {
+                    var imageBytes = File.ReadAllBytes(pathTmp);
 
-                        using (MemoryStream ms = new MemoryStream(imageBytes))
-                        {
-                            dgvUsers.Rows.Add(new object[] { item.Id, item.FirstName, item.LastName, Image.FromStream(ms), item.MobilePhoneNumber,
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        dgvUsers.Rows.Add(new object[] { item.Id, item.FirstName, item.LastName, Image.FromStream(ms), item.MobilePhoneNumber,
                         item.DateRegistered, item.LastLoginDate, item.Email});
-                        }
                     }
                 }
             }
@@ -100,7 +107,7 @@ namespace ShopApp.FormUsers
                     context.Users.Add(dbUser);
                     context.SaveChanges();
 
-                    UpdateUsersGrid(context);
+                    UpdateUsersGrid();
 
                     MessageBox.Show("Можна зберігати в БД");
                 }
@@ -133,7 +140,7 @@ namespace ShopApp.FormUsers
                         var bmp = ImageHelper.CompressImage(Image.FromFile(dlg.ImageSelect), 120, 80);
                         bmp.Save(path, ImageFormat.Jpeg);
 
-                        var user = context.Users.Find(id);
+                        var user = context.Users.SingleOrDefault(x=>x.Id==id);
 
                         user.FirstName = dlg.UserFN;
                         user.LastName = dlg.UserLN;
@@ -148,7 +155,7 @@ namespace ShopApp.FormUsers
 
                         context.SaveChanges();
 
-                        UpdateUsersGrid(context);
+                        UpdateUsersGrid();
 
                     }
                 }
@@ -176,7 +183,7 @@ namespace ShopApp.FormUsers
                         user.Deleted = true;
                         context.SaveChanges();
 
-                        UpdateUsersGrid(context);
+                        UpdateUsersGrid();
                         MessageBox.Show("Користувача видалено.");
                     }
                 }
@@ -194,6 +201,14 @@ namespace ShopApp.FormUsers
             {
                 MessageBox.Show("Авторизація пройшла успішно!");
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var lastName = txtFindLastName.Text;
+            UserSearchModel search = new UserSearchModel();
+            search.LastName = lastName;
+            UpdateUsersGrid(search);
         }
     }
 }

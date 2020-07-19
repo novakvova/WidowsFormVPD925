@@ -42,6 +42,9 @@
             this.btnUpdateUser = new System.Windows.Forms.Button();
             this.btnCreateUser = new System.Windows.Forms.Button();
             this.btnMainAuth = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFindLastName = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +53,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(17, 25);
+            this.label6.Location = new System.Drawing.Point(12, 121);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(130, 24);
             this.label6.TabIndex = 14;
@@ -70,7 +73,7 @@
             this.DataReg,
             this.DataLL,
             this.UserEmail});
-            this.dgvUsers.Location = new System.Drawing.Point(21, 52);
+            this.dgvUsers.Location = new System.Drawing.Point(16, 148);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowTemplate.Height = 80;
@@ -135,7 +138,7 @@
             // 
             // btnDelUser
             // 
-            this.btnDelUser.Location = new System.Drawing.Point(904, 230);
+            this.btnDelUser.Location = new System.Drawing.Point(899, 326);
             this.btnDelUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelUser.Name = "btnDelUser";
             this.btnDelUser.Size = new System.Drawing.Size(161, 44);
@@ -146,7 +149,7 @@
             // 
             // btnUpdateUser
             // 
-            this.btnUpdateUser.Location = new System.Drawing.Point(904, 167);
+            this.btnUpdateUser.Location = new System.Drawing.Point(899, 263);
             this.btnUpdateUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateUser.Name = "btnUpdateUser";
             this.btnUpdateUser.Size = new System.Drawing.Size(161, 44);
@@ -157,7 +160,7 @@
             // 
             // btnCreateUser
             // 
-            this.btnCreateUser.Location = new System.Drawing.Point(904, 52);
+            this.btnCreateUser.Location = new System.Drawing.Point(899, 148);
             this.btnCreateUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreateUser.Name = "btnCreateUser";
             this.btnCreateUser.Size = new System.Drawing.Size(161, 44);
@@ -168,7 +171,7 @@
             // 
             // btnMainAuth
             // 
-            this.btnMainAuth.Location = new System.Drawing.Point(904, 104);
+            this.btnMainAuth.Location = new System.Drawing.Point(899, 200);
             this.btnMainAuth.Margin = new System.Windows.Forms.Padding(4);
             this.btnMainAuth.Name = "btnMainAuth";
             this.btnMainAuth.Size = new System.Drawing.Size(161, 44);
@@ -177,14 +180,47 @@
             this.btnMainAuth.UseVisualStyleBackColor = true;
             this.btnMainAuth.Click += new System.EventHandler(this.btnMainAuth_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(26, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 20);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Прізвище";
+            // 
+            // txtFindLastName
+            // 
+            this.txtFindLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txtFindLastName.Location = new System.Drawing.Point(30, 44);
+            this.txtFindLastName.Name = "txtFindLastName";
+            this.txtFindLastName.Size = new System.Drawing.Size(290, 26);
+            this.txtFindLastName.TabIndex = 20;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(908, 20);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(138, 39);
+            this.btnSearch.TabIndex = 15;
+            this.btnSearch.Text = "Пошук";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // ListUsersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 315);
+            this.ClientSize = new System.Drawing.Size(1087, 404);
+            this.Controls.Add(this.txtFindLastName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMainAuth);
             this.Controls.Add(this.btnDelUser);
             this.Controls.Add(this.btnUpdateUser);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnCreateUser);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvUsers);
@@ -214,6 +250,9 @@
         private System.Windows.Forms.Button btnUpdateUser;
         private System.Windows.Forms.Button btnCreateUser;
         private System.Windows.Forms.Button btnMainAuth;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFindLastName;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 
