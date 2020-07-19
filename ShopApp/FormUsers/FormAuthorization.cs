@@ -1,4 +1,5 @@
 ﻿using ShopApp.Entities;
+using SimpleCrypto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,12 @@ namespace ShopApp.FormUsers
     {
         public string EmailLogin { get { return txtEmailLogin.Text; } }
         public string PasswordUser { get { return txtPasswordAuth.Text; } }
+        ApplicationDbContext _context;
 
         public FormAuthorization()
         {
             InitializeComponent();
+            _context = new ApplicationDbContext();
         }
 
         private void FormAuthorization_Load(object sender, EventArgs e)
@@ -28,10 +31,28 @@ namespace ShopApp.FormUsers
 
         private void btnAuth_Click(object sender, EventArgs e)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            if (GetPasswordByEmail(context, EmailLogin) == PasswordUser)
+            if(string.IsNullOrEmpty(PasswordUser))
             {
-                this.DialogResult = DialogResult.OK;
+                MessageBox.Show("Пароль пустий.");
+                return;
+            }
+            var user = GetUserByEmail(EmailLogin);
+            if(user!=null)
+            {
+                ICryptoService cryptoService = new PBKDF2();
+                // validate user
+                string password = PasswordUser;
+                string salt = user.PasswordHash;
+                string hashedPassword2 = cryptoService.Compute(password, salt);
+                bool isPasswordValid = cryptoService.Compare(user.Password, hashedPassword2);
+                if(isPasswordValid)
+                {
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Неправильний пароль або емейл, спробуйте ще раз.");
+                }
             }
             else
             {
@@ -39,16 +60,19 @@ namespace ShopApp.FormUsers
             }
         }
 
-        private string GetPasswordByEmail(ApplicationDbContext context, string email)
+        private DbUser GetUserByEmail(string email)
         {
-            foreach (var item in context.Users)
-            {
-                if(item.Email == email)
-                {
-                    return item.Password;
-                }
-            }
-            return null;
+            var user = _context.Users
+                .Where(x=>x.Deleted==false)
+                .SingleOrDefault(u=>u.Email==email);
+            //foreach (var item in context.Users)
+            //{
+            //    if(item.Email == email)
+            //    {
+            //        return item.Password;
+            //    }
+            //}
+            return user;
         }
     }
 }

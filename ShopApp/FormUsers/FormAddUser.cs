@@ -62,11 +62,50 @@ namespace ShopApp.FormUsers
 
         private void btnGetCode_Click(object sender, EventArgs e)
         {
-            SMTPSender emailSender = new SMTPSender();
-            CodeVal = (new Random()).Next(1000, 9000).ToString();
-            emailSender.SendMessage(UserEmail, 
-                "Шорти Incorporated | Реєстрація | Код",
-                $"<b>{CodeVal}</b>");
+            //SMTPSender emailSender = new SMTPSender();
+            //CodeVal = (new Random()).Next(1000, 9000).ToString();
+            //emailSender.SendMessage(UserEmail, 
+            //    "Шорти Incorporated | Реєстрація | Код",
+            //    $"<b>{CodeVal}</b>");
+
+
+
+            //Password = "Qvw-6Xr-Dn7-rw8";
+            //txtPsw.Text = "you choose other way";
+            //txtPswRepeat.Text = "you choose other way";
+
+            //SMTPSender emailSender = new SMTPSender();
+            //CodeVal = (new Random()).Next(1000, 9000).ToString();
+            //emailSender.SendMessage(Email,
+            //    "Incorporated | Реєстрація | Код",
+            //    $"<b>{CodeVal}</b>");
+
+            MailAddress fromMailAddress = new MailAddress("itstudentyre@gmail.com");
+            MailAddress toMailAddress = new MailAddress(UserEmail);
+
+            using (MailMessage mailMessage = new MailMessage(fromMailAddress, toMailAddress))
+            {
+                using (SmtpClient smtpClient = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587))
+                {
+                    mailMessage.Subject = " Incorporated | Реєстрація | Код";
+                    CodeVal = (new Random()).Next(1000, 9000).ToString();
+                    mailMessage.Body = CodeVal;
+
+                    smtpClient.EnableSsl = true;
+                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential(fromMailAddress.Address, "Qw3eI98*63%");
+
+                    smtpClient.Send(mailMessage);
+
+                    MessageBox.Show("Код надіслано. Прийде протягом кількох хвилин.");
+                }
+            }
+
+
+
+
+
 
             //MailAddress fromMailAddress = new MailAddress("formswindows@gmail.com");
             //MailAddress toMailAddress = new MailAddress(UserEmail);

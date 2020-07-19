@@ -1,6 +1,7 @@
 ﻿using ShopApp.Categories;
 using ShopApp.Entities;
 using ShopApp.Helpers;
+using SimpleCrypto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,6 +66,22 @@ namespace ShopApp.FormUsers
                     var bmp = ImageHelper.CompressImage(Image.FromFile(dlg.ImageSelect), 120, 80);
                     bmp.Save(path, ImageFormat.Jpeg);
 
+                    ICryptoService cryptoService = new PBKDF2();
+
+                    //New User
+                    string password = dlg.UserPassword;
+
+                    //save this salt to the database
+                    string salt = cryptoService.GenerateSalt();
+
+                    //save this hash to the database
+                    string hashedPassword = cryptoService.Compute(password);
+
+                    //validate user
+                    //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
+                    //string hashedPassword2 = cryptoService.Compute(password, salt);
+                    //bool isPasswordValid = cryptoService.Compare(hashedPassword, hashedPassword2);
+
                     ApplicationDbContext context = new ApplicationDbContext();
                     DbUser dbUser = new DbUser
                     {
@@ -76,8 +93,8 @@ namespace ShopApp.FormUsers
                         LastLoginDate = DateTime.Now,
                         Deleted = false,
                         Email = dlg.UserEmail,
-                        Password = dlg.UserPassword,
-                        PasswordHash = dlg.UserPassword.GetHashCode().ToString()
+                        Password = hashedPassword,
+                        PasswordHash = salt
 
                     };
                     context.Users.Add(dbUser);
