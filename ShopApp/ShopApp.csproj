@@ -76,7 +76,9 @@
     </Compile>
     <Compile Include="Entities\ApplicationDbContext.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\DbRole.cs" />
     <Compile Include="Entities\DbUser.cs" />
+    <Compile Include="Entities\DbUsersRole.cs" />
     <Compile Include="FormUsers\FormAddUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +124,18 @@
     <Compile Include="Migrations\202007121005251_Add tblUsers.designer.cs">
       <DependentUpon>202007121005251_Add tblUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007260617278_Add new table tblRoles.cs" />
+    <Compile Include="Migrations\202007260617278_Add new table tblRoles.designer.cs">
+      <DependentUpon>202007260617278_Add new table tblRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007260637420_Add new table tblUsersRoles.cs" />
+    <Compile Include="Migrations\202007260637420_Add new table tblUsersRoles.designer.cs">
+      <DependentUpon>202007260637420_Add new table tblUsersRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007260728114_Add tblUsersRoles rename tblUserRoles.cs" />
+    <Compile Include="Migrations\202007260728114_Add tblUsersRoles rename tblUserRoles.designer.cs">
+      <DependentUpon>202007260728114_Add tblUsersRoles rename tblUserRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\UserSearchModel.cs" />
     <Compile Include="Program.cs" />
@@ -156,6 +170,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007121005251_Add tblUsers.resx">
       <DependentUpon>202007121005251_Add tblUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007260617278_Add new table tblRoles.resx">
+      <DependentUpon>202007260617278_Add new table tblRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007260637420_Add new table tblUsersRoles.resx">
+      <DependentUpon>202007260637420_Add new table tblUsersRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007260728114_Add tblUsersRoles rename tblUserRoles.resx">
+      <DependentUpon>202007260728114_Add tblUsersRoles rename tblUserRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

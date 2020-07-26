@@ -36,5 +36,6 @@ namespace ShopApp.Entities
 
         [Required, StringLength(150)]
         public string PasswordHash { get; set; }
+        public virtual ICollection<DbUserRole> DbUserRoles { get; set; }
     }
 }

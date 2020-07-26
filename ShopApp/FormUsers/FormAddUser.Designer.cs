@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtFN = new System.Windows.Forms.TextBox();
@@ -46,7 +47,9 @@
             this.btnGetCode = new System.Windows.Forms.Button();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.uImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -54,7 +57,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(269, 25);
+            this.label1.Location = new System.Drawing.Point(294, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(275, 25);
             this.label1.TabIndex = 0;
@@ -260,6 +263,7 @@
             this.Text = "FormAddUser";
             this.Load += new System.EventHandler(this.FormAddUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.uImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,5 +289,6 @@
         private System.Windows.Forms.Button btnGetCode;
         private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
