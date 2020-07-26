@@ -46,6 +46,8 @@
             this.newtxtFN = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.clbRoles = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.newuImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,11 +219,32 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Редагування користувача";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label9.Location = new System.Drawing.Point(594, 141);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(202, 25);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "Ролі користувача";
+            // 
+            // clbRoles
+            // 
+            this.clbRoles.FormattingEnabled = true;
+            this.clbRoles.Location = new System.Drawing.Point(604, 172);
+            this.clbRoles.Name = "clbRoles";
+            this.clbRoles.Size = new System.Drawing.Size(184, 214);
+            this.clbRoles.TabIndex = 38;
+            // 
             // FormUpdateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 568);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.clbRoles);
             this.Controls.Add(this.newtxtCode);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.newbtnGetCode);
@@ -269,5 +292,7 @@
         private System.Windows.Forms.TextBox newtxtFN;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckedListBox clbRoles;
     }
 }

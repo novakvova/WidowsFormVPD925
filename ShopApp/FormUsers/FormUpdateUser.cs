@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,13 +23,44 @@ namespace ShopApp.FormUsers
         public string UserPassword { get { return newtxtPassword.Text; } }
         public string Code { get { return newtxtCode.Text; } }
         private string CodeVal;
+        public List<int> ListRolesId { get; private set; } = new List<int>();
+        private ApplicationDbContext _context { get; set; }
 
-        public FormUpdateUser()
+        public FormUpdateUser(ApplicationDbContext context)
         {
             InitializeComponent();
+            _context = context;
+
             newuImage.Image = Image.FromFile("images/noimage.png");
             newuImage.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+
         }
+
+        public void FillForm(DbUser user)
+        {
+            newtxtFN.Text = user.FirstName;
+            newtxtLN.Text = user.LastName;
+            newtxtPhone.Text = user.MobilePhoneNumber;
+            newtxtEmail.Text = user.Email;
+
+            // По юзеру отримуємо список ролей для цього юзера
+            var userRole = _context.UserRoles.Where(r => r.UserId == user.Id).ToList();
+
+            // Проходимось по всіх ролях, які взагалі є в базі
+            foreach (var role in _context.Roles)
+            {
+                // Якщо ця роль є у юзера, то виділяємо
+                if (userRole.Any(x => x.RoleId == role.Id))
+                    clbRoles.Items.Add(role.Name, true);
+                else
+                    clbRoles.Items.Add(role.Name);
+            }
+
+        }
+
+
 
         private void FormUpdateUser_Load(object sender, EventArgs e)
         {
@@ -75,14 +107,26 @@ namespace ShopApp.FormUsers
 
         private void newbntOk_Click(object sender, EventArgs e)
         {
-            if (CodeVal == Code)
+
+            var checkedRoles = clbRoles.CheckedItems;
+
+            foreach (var item in checkedRoles)
             {
-                this.DialogResult = DialogResult.OK;
+                var role = _context.Roles.SingleOrDefault(r => r.Name == item);
+                if (role != null)
+                    ListRolesId.Add(role.Id);
             }
-            else
-            {
-                MessageBox.Show("Неправильний код або емейл, спробуйте ще раз.");
-            }
+
+
+            this.DialogResult = DialogResult.OK;
+            //if (CodeVal == Code)
+            //{
+            //    this.DialogResult = DialogResult.OK;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Неправильний код або емейл, спробуйте ще раз.");
+            //}
         }
     }
 }

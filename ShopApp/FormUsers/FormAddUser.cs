@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,12 +23,18 @@ namespace ShopApp.FormUsers
         public string UserPassword { get { return txtPassword.Text; } }
         public string Code { get { return txtCode.Text; } }
         private string CodeVal;
+        public List<int> ListRolesId { get; private set; } = new List<int>();
+        private ApplicationDbContext _context { get; set; }
 
-        public FormAddUser()
+        public FormAddUser(ApplicationDbContext context)
         {
             InitializeComponent();
+            _context = context;
             uImage.Image = Image.FromFile("images/noimage.png");
             uImage.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            foreach (var role in context.Roles)
+                clbRoles.Items.Add(role.Name);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -39,6 +46,14 @@ namespace ShopApp.FormUsers
         {
             if (CodeVal == Code)
             {
+                var checkedRoles = clbRoles.CheckedItems;
+
+                foreach (var item in checkedRoles)
+                {
+                    var role = _context.Roles.SingleOrDefault(r => r.Name == item);
+                    if (role != null)
+                        ListRolesId.Add(role.Id);
+                }
                 this.DialogResult = DialogResult.OK;
             }
             else

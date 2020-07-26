@@ -29,13 +29,13 @@ namespace ShopApp.FormUsers
             UpdateUsersGrid();
         }
 
-        private void UpdateUsersGrid(UserSearchModel search=null)
+        private void UpdateUsersGrid(UserSearchModel search = null)
         {
             dgvUsers.Rows.Clear();
             var query = _context.Users.Where(u => u.Deleted == false);
-            if(search!=null)
+            if (search != null)
             {
-                if(!string.IsNullOrEmpty(search.LastName))
+                if (!string.IsNullOrEmpty(search.LastName))
                 {
                     query = query.Where(u => u.LastName.Contains(search.LastName));
                 }
@@ -64,7 +64,7 @@ namespace ShopApp.FormUsers
         {
             try
             {
-                FormAddUser dlg = new FormAddUser();
+                FormAddUser dlg = new FormAddUser(_context);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
 
@@ -93,7 +93,7 @@ namespace ShopApp.FormUsers
                     //string hashedPassword2 = cryptoService.Compute(password, salt);
                     //bool isPasswordValid = cryptoService.Compare(hashedPassword, hashedPassword2);
 
-                    ApplicationDbContext context = new ApplicationDbContext();
+                    //ApplicationDbContext context = new ApplicationDbContext();
                     DbUser dbUser = new DbUser
                     {
                         FirstName = dlg.UserFN,
@@ -108,8 +108,22 @@ namespace ShopApp.FormUsers
                         PasswordHash = salt
 
                     };
-                    context.Users.Add(dbUser);
-                    context.SaveChanges();
+
+
+                    _context.Users.Add(dbUser);
+                    _context.SaveChanges();
+
+                    int userId = dbUser.Id;
+                    foreach (var role in dlg.ListRolesId)
+                    {
+                        _context.UserRoles.Add(new Entities.DbUserRole
+                        {
+                            RoleId = role,
+                            UserId = userId
+                        });
+                    }
+                    _context.SaveChanges();
+
 
                     UpdateUsersGrid();
 
@@ -131,33 +145,60 @@ namespace ShopApp.FormUsers
                     ApplicationDbContext context = new ApplicationDbContext();
                     DataGridViewRow row = this.dgvUsers.SelectedRows[0];
                     var id = int.Parse(row.Cells["UserId"].Value.ToString());
-                    var cat = context.Users.SingleOrDefault(c => c.Id == id);
+                    var user = context.Users.SingleOrDefault(c => c.Id == id);
 
-                    FormUpdateUser dlg = new FormUpdateUser();
-                    if (dlg.ShowDialog() == DialogResult.OK && cat != null)
+                    FormUpdateUser dlg = new FormUpdateUser(_context);
+
+                    dlg.FillForm(user);
+
+
+
+                    if (dlg.ShowDialog() == DialogResult.OK && user != null)
                     {
                         string extension = Path.GetExtension(dlg.ImageSelect);
                         string nameFile = Path.GetRandomFileName() + extension;
-                        var path = Path.Combine(Directory.GetCurrentDirectory(),
-                            "images", nameFile);
 
-                        var bmp = ImageHelper.CompressImage(Image.FromFile(dlg.ImageSelect), 120, 80);
-                        bmp.Save(path, ImageFormat.Jpeg);
+                        //var path = Path.Combine(Directory.GetCurrentDirectory(),
+                        //    "images", nameFile);
 
-                        var user = context.Users.SingleOrDefault(x=>x.Id==id);
+                        //var bmp = ImageHelper.CompressImage(Image.FromFile(dlg.ImageSelect), 120, 80);
+                        //bmp.Save(path, ImageFormat.Jpeg);
+
+                        user = context.Users.SingleOrDefault(x => x.Id == id);
 
                         user.FirstName = dlg.UserFN;
                         user.LastName = dlg.UserLN;
-                        user.Image = nameFile;
+                        //user.Image = nameFile;
                         user.MobilePhoneNumber = dlg.UserPhone;
-                        user.DateRegistered = DateTime.Now;
-                        user.LastLoginDate = DateTime.Now;
-                        user.Deleted = false;
+                        //user.DateRegistered = DateTime.Now;
+                        //user.LastLoginDate = DateTime.Now;
+                        //user.Deleted = false;
                         user.Email = dlg.UserEmail;
-                        user.Password = dlg.UserPassword;
-                        user.PasswordHash = dlg.UserPassword.GetHashCode().ToString();
+                        //user.Password = dlg.UserPassword;
+                        //user.PasswordHash = dlg.UserPassword.GetHashCode().ToString();
 
                         context.SaveChanges();
+
+
+                        int userId = user.Id;
+                        foreach (var role in _context.UserRoles.Where(u => u.UserId == userId).ToList())
+                        {
+                            _context.UserRoles.Remove(role);
+                        }
+                        _context.SaveChanges();
+
+                        foreach (var role in dlg.ListRolesId)
+                        {
+                            _context.UserRoles.Add(new Entities.DbUserRole
+                            {
+                                RoleId = role,
+                                UserId = userId
+                            });
+                        }
+                        _context.SaveChanges();
+
+
+
 
                         UpdateUsersGrid();
 
